@@ -1,4 +1,4 @@
-import { Column,Entity, ManyToMany, ManyToOne} from 'typeorm';
+import { Column,Entity, ManyToMany, ManyToOne, PrimaryGeneratedColumn} from 'typeorm';
 import { BaseModel } from './base.model';
 import { CustomerModel } from './customer.model';
 
@@ -13,11 +13,12 @@ export class ProductModel extends BaseModel {
 		Object.assign(this, init)
 	}
 	//#endregion
+	
 
 	@Column()
 	public product_name: string
 
 	@ManyToOne(()=>CustomerModel, (customer)=>customer.products)
-	customer:CustomerModel
+	public customer:CustomerModel
 
 }

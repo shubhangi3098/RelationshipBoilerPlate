@@ -1,4 +1,4 @@
-import { Column,Entity, OneToMany} from 'typeorm';
+import { Column,Entity, OneToMany, PrimaryGeneratedColumn} from 'typeorm';
 import { BaseModel } from './base.model';
 import {ProductModel } from '../models/product.model'
 
@@ -13,7 +13,8 @@ export class CustomerModel extends BaseModel {
 		Object.assign(this, init)
 	}
 	//#endregion
-
+	
+	
 	@Column()
 	public name: string
 	

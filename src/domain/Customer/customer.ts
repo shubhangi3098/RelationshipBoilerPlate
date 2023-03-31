@@ -41,10 +41,14 @@ export class Customer extends AggregateRoot<CustomerProps> {
 	
 		if(!(name instanceof CustomerName	)){
 			Result.fail(new GenericAppError.DomainError("The customer name cannot hold less than five alphabets"))
+			
 		}     
 		this._props.name = name
-		return Result.ok(this)
+		return Result.ok(this)	
 	}
+
+
+	
 
 	private setProduct(products:Product[]) {
 		for(const product of products)

@@ -2,21 +2,22 @@ import { Injectable } from '@nestjs/common';
 import { eDataSource, IDTO, IMapper, UniqueEntityID } from '@softobiz-df/shared-lib';
 import {  Customer  } from 'src/domain/customer/customer';
 import {  CustomerModel } from '../models/customer.model';
+import { ProductSqlMapper } from './product.mapper';
 
 
 @Injectable()
 export class  CustomerSqlMapper implements IMapper {
-	constructor() {}
+	constructor(private productMapper:ProductSqlMapper	) {}
 
 	toDomain(raw:  CustomerModel): Customer {
-	// 	return  Customer.create(
-	// 		{
-	// 			name: CustomerName.create(raw.name),
+		// return  Customer.create(
+		// 	{
+		// 		name: raw.name,
 				
-	// 		},
-	// 		new UniqueEntityID(raw.uuid),
-	// 		eDataSource.STORAGE,
-	// 	).getValue()
+		// 	},
+		// 	new UniqueEntityID(raw.uuid),
+		// 	eDataSource.STORAGE,
+		// ).getValue()
 	throw new Error()
 	}
 
@@ -26,6 +27,7 @@ export class  CustomerSqlMapper implements IMapper {
 		}
 		curEntity.uuid = input.id.toString()
 		curEntity.name = input.name;
+		curEntity.products = input.props.products.map(x=>this.productMapper.toPersistence(x))
 		
 		//@todo:: improve mapping
 		return curEntity;

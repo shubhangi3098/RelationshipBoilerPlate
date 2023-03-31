@@ -30,11 +30,18 @@ export class CustomerSqlRepository implements ICustomerRepository {
 	
 
 	async save(input: Customer): Promise<Result<Customer>> {
-		const persistence = this._mapper.toPersistence(input)
-		await this._entityManager.transaction(async (em) => {
-			await em.save(persistence)
-		})
-		return Result.ok(input)
+		try {
+			const persistence = this._mapper.toPersistence(input)
+			await this._entityManager.transaction(async (em) => {
+				await em.save(persistence)
+				await em.save(persistence.products)
+			})
+			return Result.ok(input)
+		} catch (error) {
+			console.log(error);
+			
+		}
+		
 	}
 	exists(input: Customer): Promise<Result<boolean>> {
 		throw new Error('Method not implemented.')

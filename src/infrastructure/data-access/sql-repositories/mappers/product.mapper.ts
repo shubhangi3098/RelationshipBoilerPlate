@@ -27,7 +27,7 @@ export class  ProductSqlMapper implements IMapper {
 		}
 		curEntity.uuid = input.getProductID.toString()
 		curEntity.product_name = input.props.productName;
-		curEntity.customer=new CustomerModel({uuid:input.getProductID.toString()})
+		curEntity.customer=new CustomerModel({uuid :input.getCustomerID.id.toString()})
 		//@todo:: improve mapping
 		return curEntity;
 	}

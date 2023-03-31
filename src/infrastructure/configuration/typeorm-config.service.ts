@@ -31,7 +31,7 @@ export class TypeOrmConnectionService implements TypeOrmOptionsFactory {
 			database: this._config.database,
 			entities: Object.keys(models).map((k) => models[k]),
 			autoLoadEntities: false,
-			synchronize: true,
+			synchronize: false,
 			logging: true,
 			logger: 'file',
 		}
